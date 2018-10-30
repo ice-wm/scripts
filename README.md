@@ -1,0 +1,2 @@
+# scripts
+IceWM install scripts
