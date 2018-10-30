@@ -29,7 +29,7 @@ noask=0
 
 for opt
 do
-    case $1 in
+    case $opt in
         (+s) sound=0 ;;
         (-s) sound=1 ;;
         (+y) noask=1 ;;
