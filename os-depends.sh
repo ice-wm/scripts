@@ -34,6 +34,7 @@ do
         (-s) sound=1 ;;
         (+y) noask=1 ;;
         (-y) noask=0 ;;
+        (*) usage ;;
     esac
 done
 
