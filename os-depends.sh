@@ -208,7 +208,7 @@ centos () {
         echo "The following packages need to be installed:"
         echo "    $i"
         if isroot; then
-            yum install $ask $i || fail "apt-get failed to install $i"
+            yum install $ask $i || fail "yum failed to install $i"
         else
             echo "Please install these as root"
         fi
