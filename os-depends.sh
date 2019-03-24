@@ -194,7 +194,7 @@ centos () {
     u=`mktemp`
     yum list installed | awk '{print $1}' >$t 2>/dev/null || fail "yum list failed"
     yum list | awk '{print $1}' >$u 2>/dev/null || fail "yum list failed"
-    r=" asciidoc alsa-lib-devel autoconf automake cmake fontconfig-devel fribidi-devel gcc-c++ gdk-pixbuf2-devel librsvg2-devel gettext gettext-devel git libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libjpeg-turbo-devel libpng-devel libtool make xterm xdg-utils "
+    r=" asciidoc alsa-lib-devel autoconf automake cmake fontconfig-devel fribidi-devel gcc-c++ gdk-pixbuf2-devel gdk-pixbuf2-xlib-devel librsvg2-devel gettext gettext-devel git glib2-devel libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libjpeg-turbo-devel libpng-devel libtool make perl-Pod-Html xterm xdg-utils "
     [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
     [ $noask = 1 ] && ask=-y || ask=
     i=
