@@ -198,7 +198,7 @@ centos () {
     [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
     [ $noask = 1 ] && ask=-y || ask=
     i=
-    for p in $r
+    for p in $r $snd
     do
         grep -q -e ^$p $t || i="$i $p"
     done
