@@ -200,7 +200,7 @@ centos () {
     i=
     for p in $r $snd
     do
-        grep -q -e ^$p $t || i="$i $p"
+        grep -q -e ^$p\. $t || i="$i $p"
     done
     if [ "$i" = "" ]; then
         echo "All required packages are already installed"
