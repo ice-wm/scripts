@@ -42,7 +42,7 @@ osarch () {
     type pacman &>/dev/null || fail "pacman is not an executable command"
     t=`mktemp`
     pacman -Q | awk '{print $1}' >$t 2>/dev/null || fail "pacman -Q failed"
-    r=" asciidoc asciidoctor autoconf automake binutils cmake fontconfig fribidi gcc gdk-pixbuf2 librsvg gettext git libice libsm libtool libx11 libxext libxft libxinerama libxrandr libxrender libxcomposite libxdamage libxfixes libpng libjpeg libxpm make discount perl xdg-utils xterm xorg-xmessage "
+    r=" asciidoc asciidoctor autoconf automake binutils cmake fontconfig fribidi gcc gdk-pixbuf2 gdk-pixbuf-xlib imlib2 librsvg gettext git libice libsm libtool libx11 libxext libxft libxinerama libxrandr libxrender libxcomposite libxdamage libxfixes libpng libjpeg libxpm make discount perl xdg-utils xterm xorg-xmessage "
     [ $sound = 1 ] && snd=" libao libsndfile" || snd=
     [ $noask = 1 ] && ask=y || ask=
     i=
@@ -147,7 +147,7 @@ opensuse () {
     type rpm &>/dev/null || fail "rpm is not an executable command"
     t=`mktemp`
     rpm -qa >$t || fail "rpm -qa failed"
-    r=" alsa-devel asciidoc autoconf automake fontconfig-devel fribidi-devel gdk-pixbuf-devel gettext gettext-tools git libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libpng16-devel libjpeg62-devel libXpm-devel libtool xterm xdg-utils "
+    r=" alsa-devel asciidoc autoconf automake fontconfig-devel fribidi-devel gdk-pixbuf-devel gettext gettext-tools git libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libpng16-devel libjpeg62-devel libXpm-devel librsvg-devel libtool make xterm xdg-utils "
     [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
     [ $noask = 1 ] && ask=-y || ask=
     i=
