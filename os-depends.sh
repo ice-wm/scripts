@@ -120,9 +120,9 @@ openbsd () {
     type pkg_info &>/dev/null || fail "pkg_info is not an executable command"
     t=`mktemp`
     pkg_info >$t 2>/dev/null || fail "pkg_info failed"
-    r=" asciidoc autoconf automake cmake freetype fribidi g++ gettext-tools git gmake libao libsndfile libtool lxrandr jpeg png py-markdown"
+    r=" asciidoc autoconf automake cmake freetype fribidi g++ gettext-tools git gmake imlib2 libao libsndfile libtool lxrandr jpeg png py-markdown"
     [ $sound = 1 ] && snd=" libao libsndfile" || snd=
-    [ $noask = 1 ] && ask= || ask=-I
+    [ $noask = 1 ] && ask=-I || ask=
     i=
     for p in $r $snd
     do
@@ -133,8 +133,8 @@ openbsd () {
     else
         echo "The following packages need to be installed:"
         echo "    $i"
-        if isroot && [ -n "$PKG_PATH" ]; then
-            pkg_add $ask $i || fail "pkg_add failed to install $i"
+        if isroot; then
+            pkg_add -U $ask $i || fail "pkg_add failed to install $i"
         else
             echo "Please install these as root"
         fi
