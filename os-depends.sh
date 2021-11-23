@@ -42,7 +42,7 @@ osarch () {
     type pacman &>/dev/null || fail "pacman is not an executable command"
     t=`mktemp`
     pacman -Q | awk '{print $1}' >$t 2>/dev/null || fail "pacman -Q failed"
-    r=" asciidoc asciidoctor autoconf automake binutils cmake fontconfig fribidi gcc gdk-pixbuf2 gdk-pixbuf-xlib imlib2 librsvg gettext git libice libsm libtool libx11 libxext libxft libxinerama libxrandr libxrender libxcomposite libxdamage libxfixes libpng libjpeg libxpm make discount perl ttf-dejavu xdg-utils xterm xorg-xmessage "
+    r=" asciidoc asciidoctor autoconf automake binutils cmake fontconfig fribidi gcc gdk-pixbuf2 gdk-pixbuf-xlib imlib2 librsvg gettext git libice libsm libtool libx11 libxext libxft libxinerama libxrandr libxrender libxcomposite libxdamage libxfixes libpng libjpeg libxpm make discount perl ttf-dejavu xdg-utils xterm xorg-xmessage yad "
     [ $sound = 1 ] && snd=" libao libsndfile" || snd=
     [ $noask = 1 ] && ask=y || ask=
     i=
@@ -68,7 +68,7 @@ debian () {
     type apt &>/dev/null || fail "apt is not an executable command"
     t=`mktemp`
     apt list --installed >$t || fail "apt list --installed failed"
-    r=" asciidoctor autoconf automake autopoint build-essential cmake fonts-dejavu gettext git libfontconfig1-dev libfribidi-dev libgdk-pixbuf2.0-dev libimlib2-dev libtool libsm-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxrandr-dev libxrender-dev libxcomposite-dev libxdamage-dev libxfixes-dev libpng-dev libjpeg-dev libxpm-dev librsvg2-dev xterm xdg-utils "
+    r=" asciidoctor autoconf automake autopoint build-essential cmake fonts-dejavu gettext git libfontconfig1-dev libfribidi-dev libgdk-pixbuf2.0-dev libimlib2-dev libtool libsm-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxrandr-dev libxrender-dev libxcomposite-dev libxdamage-dev libxfixes-dev libpng-dev libjpeg-dev libxpm-dev librsvg2-dev x11-utils xterm xdg-utils yad "
     [ $sound = 1 ] && snd=" libao-dev libasound2-dev libsndfile1-dev libpulse-dev" || snd=
     [ $noask = 1 ] && ask=--yes || ask=
     i=
@@ -94,7 +94,7 @@ ubuntu () {
     type apt &>/dev/null || fail "apt is not an executable command"
     t=`mktemp`
     apt list --installed >$t 2>/dev/null || fail "apt list --installed failed"
-    r=" asciidoctor autoconf automake autopoint build-essential cmake fonts-dejavu gettext git libfontconfig1-dev libfribidi-dev libgdk-pixbuf2.0-dev libimlib2-dev libtool libsm-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxrandr-dev libxrender-dev libxcomposite-dev libxdamage-dev libxfixes-dev libpng-dev libjpeg-dev libxpm-dev librsvg2-dev xterm xdg-utils "
+    r=" asciidoctor autoconf automake autopoint build-essential cmake fonts-dejavu gettext git libfontconfig1-dev libfribidi-dev libgdk-pixbuf2.0-dev libimlib2-dev libtool libsm-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxrandr-dev libxrender-dev libxcomposite-dev libxdamage-dev libxfixes-dev libpng-dev libjpeg-dev libxpm-dev librsvg2-dev x11-utils xterm xdg-utils yad "
     [ $sound = 1 ] && snd=" libao-dev libasound2-dev libsndfile1-dev libpulse-dev" || snd=
     [ $noask = 1 ] && ask=--yes || ask=
     i=
@@ -147,7 +147,7 @@ opensuse () {
     type rpm &>/dev/null || fail "rpm is not an executable command"
     t=`mktemp`
     rpm -qa >$t || fail "rpm -qa failed"
-    r=" alsa-devel asciidoc autoconf automake dejavu-fonts fontconfig-devel fribidi-devel gdk-pixbuf-devel gettext gettext-tools git imlib2-devel imlib2-loaders libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libpng16-devel libjpeg62-devel libXpm-devel librsvg-devel libtool make xterm xdg-utils "
+    r=" alsa-devel asciidoc autoconf automake dejavu-fonts fontconfig-devel fribidi-devel gdk-pixbuf-devel gettext gettext-tools git imlib2-devel imlib2-loaders libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libpng16-devel libjpeg62-devel libXpm-devel librsvg-devel libtool make xmessage xterm xdg-utils zenity "
     [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
     [ $noask = 1 ] && ask=-y || ask=
     i=
@@ -194,7 +194,7 @@ centos () {
     u=`mktemp`
     yum list installed | awk '{print $1}' >$t 2>/dev/null || fail "yum list failed"
     yum list | awk '{print $1}' >$u 2>/dev/null || fail "yum list failed"
-    r=" asciidoc alsa-lib-devel autoconf automake cmake dejavu-fonts fontconfig-devel fribidi-devel gcc-c++ gdk-pixbuf2-devel gdk-pixbuf2-xlib-devel librsvg2-devel gettext gettext-devel git glib2-devel imlib2-devel libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libjpeg-turbo-devel libpng-devel libtool make perl-Pod-Html xterm xdg-utils "
+    r=" asciidoc alsa-lib-devel autoconf automake cmake dejavu-fonts fontconfig-devel fribidi-devel gcc-c++ gdk-pixbuf2-devel gdk-pixbuf2-xlib-devel librsvg2-devel gettext gettext-devel git glib2-devel imlib2-devel libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libjpeg-turbo-devel libpng-devel libtool make perl-Pod-Html xterm xdg-utils xorg-x11-apps zenity "
     [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
     [ $noask = 1 ] && ask=-y || ask=
     i=
