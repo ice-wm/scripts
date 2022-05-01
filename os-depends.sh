@@ -68,6 +68,7 @@ debian () {
     type apt &>/dev/null || fail "apt is not an executable command"
     t=`mktemp`
     apt list --installed >$t || fail "apt list --installed failed"
+    sed -i -e '/-base\//d' $t
     r=" asciidoctor autoconf automake autopoint build-essential cmake fonts-dejavu gettext git libfontconfig1-dev libfribidi-dev libgdk-pixbuf2.0-dev libimlib2-dev libtool libsm-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxrandr-dev libxrender-dev libxcomposite-dev libxdamage-dev libxfixes-dev libpng-dev libjpeg-dev libxpm-dev librsvg2-dev x11-utils xterm xdg-utils yad "
     [ $sound = 1 ] && snd=" libao-dev libasound2-dev libsndfile1-dev libpulse-dev" || snd=
     [ $noask = 1 ] && ask=--yes || ask=
@@ -94,6 +95,7 @@ ubuntu () {
     type apt &>/dev/null || fail "apt is not an executable command"
     t=`mktemp`
     apt list --installed >$t 2>/dev/null || fail "apt list --installed failed"
+    sed -i -e '/-base\//d' $t
     r=" asciidoctor autoconf automake autopoint build-essential cmake fonts-dejavu gettext git libfontconfig1-dev libfribidi-dev libgdk-pixbuf2.0-dev libimlib2-dev libtool libsm-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxrandr-dev libxrender-dev libxcomposite-dev libxdamage-dev libxfixes-dev libpng-dev libjpeg-dev libxpm-dev librsvg2-dev x11-utils xterm xdg-utils yad "
     [ $sound = 1 ] && snd=" libao-dev libasound2-dev libsndfile1-dev libpulse-dev" || snd=
     [ $noask = 1 ] && ask=--yes || ask=
