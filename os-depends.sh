@@ -6,8 +6,9 @@
 # Arch, Debian, OpenBSD, OpenSUSE,
 # Ubuntu, CentOS, Oracle Linux, Red Hat,
 # and their derivatives.
+# and finally Void Linux support.
 # Run this as root.
-#
+# 
 
 fail () {
     echo "$0: $@" >&2
@@ -30,8 +31,8 @@ noask=0
 for opt
 do
     case $opt in
-        (+s) sound=0 ;;
-        (-s) sound=1 ;;
+        (+s) sound=1 ;;
+        (-s) sound=0 ;;
         (+y) noask=1 ;;
         (-y) noask=0 ;;
         (*) usage ;;
@@ -218,6 +219,32 @@ centos () {
     rm -f -- $t
 }
 
+osvoid () {
+    type xbps-install &>/dev/null || fail "xbps-install is not an executable command"
+    t=`mktemp`
+    xbps-query -l | awk '{ print $2 }' | xargs -n1 xbps-uhelper getpkgname >$t 2>/dev/null || fail "xbps-query -l list failed"
+    r="asciidoc alsa-lib-devel autoconf automake cmake dejavu-fonts-ttf fontconfig-devel fribidi-devel gcc gdk-pixbuf-devel gdk-pixbuf-xlib-devel librsvg-devel gettext gettext-devel git glib-devel imlib2-devel libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libjpeg-turbo-devel libpng-devel libtool make  python3-Markdown xterm xdg-utils xorg-apps zenity "
+    [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
+    [ $noask = 1 ] && ask=-y || ask=
+	i=
+    for p in $snd $r
+    do
+        grep -q -e ^$p $t || i="$i $p"
+    done
+    if [ "$i" = "" ]; then
+        echo "All required packages were already installed."
+    else
+        echo "The following packages need to be installed:"
+        echo "    $i"
+        if isroot; then
+            xbps-install $ask $i || fail "xbps-install failed to install $i"
+        else
+            echo "Please install these as root"
+        fi
+    fi
+    rm -f -- $t
+}
+
 check () {
     grep -q -e "$1" /etc/os-release 2>/dev/null
 }
@@ -262,6 +289,10 @@ linux () {
                 ;;
             (rhel|fedora|Fedora)
                 centos
+                return 0
+                ;;
+			(Void|void)
+                osvoid
                 return 0
                 ;;
             (*)
