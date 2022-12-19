@@ -3,12 +3,11 @@
 # Examine the installed system packages,
 # and install missing IceWM dependencies.
 # Supported operating systems include:
-# Arch, Debian, OpenBSD, OpenSUSE,
-# Ubuntu, CentOS, Oracle Linux, Red Hat,
+# Arch, Debian, OpenBSD, OpenSUSE, Ubuntu,
+# Void Linux, CentOS, Oracle Linux, Red Hat,
 # and their derivatives.
-# and finally Void Linux support.
 # Run this as root.
-# 
+#
 
 fail () {
     echo "$0: $@" >&2
@@ -31,8 +30,8 @@ noask=0
 for opt
 do
     case $opt in
-        (+s) sound=1 ;;
-        (-s) sound=0 ;;
+        (+s) sound=0 ;;
+        (-s) sound=1 ;;
         (+y) noask=1 ;;
         (-y) noask=0 ;;
         (*) usage ;;
@@ -226,7 +225,7 @@ osvoid () {
     r="asciidoc alsa-lib-devel autoconf automake cmake dejavu-fonts-ttf fontconfig-devel fribidi-devel gcc gdk-pixbuf-devel gdk-pixbuf-xlib-devel librsvg-devel gettext gettext-devel git glib-devel imlib2-devel libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libjpeg-turbo-devel libpng-devel libtool make  python3-Markdown xterm xdg-utils xorg-apps zenity "
     [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
     [ $noask = 1 ] && ask=-y || ask=
-	i=
+    i=
     for p in $snd $r
     do
         grep -q -e ^$p $t || i="$i $p"
@@ -291,7 +290,7 @@ linux () {
                 centos
                 return 0
                 ;;
-			(Void|void)
+            (Void|void)
                 osvoid
                 return 0
                 ;;
