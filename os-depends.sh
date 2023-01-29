@@ -122,7 +122,7 @@ openbsd () {
     type pkg_info &>/dev/null || fail "pkg_info is not an executable command"
     t=`mktemp`
     pkg_info >$t 2>/dev/null || fail "pkg_info failed"
-    r=" asciidoc autoconf automake cmake dejavu-ttf freetype fribidi g++ gettext-tools git gmake imlib2 libao libsndfile libtool lxrandr jpeg png py-markdown"
+    r=" asciidoc autoconf automake cmake dejavu-ttf freetype fribidi g++ gettext-tools git gmake imlib2 libao libsndfile libtool lxrandr jpeg png py3-markdown"
     [ $sound = 1 ] && snd=" libao libsndfile" || snd=
     [ $noask = 1 ] && ask=-I || ask=
     i=
