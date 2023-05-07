@@ -196,11 +196,27 @@ centos () {
     u=`mktemp`
     yum list installed | awk '{print $1}' >$t 2>/dev/null || fail "yum list failed"
     yum list | awk '{print $1}' >$u 2>/dev/null || fail "yum list failed"
-    r=" asciidoc alsa-lib-devel autoconf automake cmake dejavu-fonts fontconfig-devel fribidi-devel gcc-c++ gdk-pixbuf2-devel gdk-pixbuf2-xlib-devel librsvg2-devel gettext gettext-devel git glib2-devel imlib2-devel libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libjpeg-turbo-devel libpng-devel libtool make markdown perl-Pod-Html xterm xdg-utils xorg-x11-apps zenity "
+    r=" asciidoc alsa-lib-devel autoconf automake cmake fontconfig-devel fribidi-devel gcc-c++ gdk-pixbuf2-devel gdk-pixbuf2-xlib-devel librsvg2-devel gettext gettext-devel git glib2-devel imlib2-devel libSM-devel libX11-devel libXext-devel libXft-devel libXinerama-devel libXpm-devel libXrandr-devel libXrender-devel libXcomposite-devel libXdamage-devel libXfixes-devel libjpeg-turbo-devel libpng-devel libtool make perl-Pod-Html xterm xdg-utils zenity "
+    opt=
+    if grep -q -e '^dejavu-fonts\.' $u; then
+        opt="dejavu-fonts"
+    elif grep -q -e '^dejavu-fonts-all\.' $u; then
+        opt="dejavu-fonts-all"
+    elif grep -q -e '^dejavu-sans-fonts\.' $u; then
+        opt="dejavu-sans-fonts dejavu-sans-mono-fonts"
+    fi
+    if grep -q -e '^markdown\.' $u; then
+        opt="$opt markdown"
+    elif grep -q -e '^multimarkdown\.' $u; then
+        opt="$opt multimarkdown"
+    fi
+    grep -q -e '^xorg-x11-apps\.' $u && opt="$opt xorg-x11-apps"
+    grep -q -e '^xmessage\.' $u && opt="$opt xmessage"
+    grep -q -e '^xset\.' $u && opt="$opt xset"
     [ $sound = 1 ] && snd=" libao-devel libsndfile-devel" || snd=
     [ $noask = 1 ] && ask=-y || ask=
     i=
-    for p in $r $snd
+    for p in $r $opt $snd
     do
         grep -q -e ^$p\. $t || i="$i $p"
     done
