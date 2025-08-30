@@ -42,7 +42,7 @@ osarch () {
     type pacman &>/dev/null || fail "pacman is not an executable command"
     t=`mktemp`
     pacman -Q | awk '{print $1}' >$t 2>/dev/null || fail "pacman -Q failed"
-    r=" asciidoc asciidoctor autoconf automake binutils cmake fontconfig fribidi gcc gdk-pixbuf2 gdk-pixbuf-xlib imlib2 librsvg gettext git libice libsm libtool libx11 libxext libxft libxinerama libxrandr libxrender libxcursor libxcomposite libxdamage libxfixes libxres libpng libjpeg libxpm lzip make discount perl ttf-dejavu xdg-utils xterm xorg-xmessage yad "
+    r=" asciidoc asciidoctor autoconf automake binutils cmake fontconfig fribidi gcc gdk-pixbuf2 gdk-pixbuf-xlib imlib2 librsvg gettext git libice libsm libtool libx11 libxext libxft libxinerama libxrandr libxrender libxcursor libxcomposite libxdamage libxfixes libxres libpng libjpeg libxpm lzip make discount perl pkg-config ttf-dejavu xdg-utils xterm xorg-xmessage yad "
     [ $sound = 1 ] && snd=" libao libsndfile" || snd=
     [ $noask = 1 ] && ask=y || ask=
     i=
@@ -57,6 +57,9 @@ osarch () {
         echo "    $i"
         if isroot; then
             pacman -S$ask $i || fail "pacman failed to install $i"
+            if ! type gcc &>/dev/null; then
+                pacman -S$ask gcc || fail "pacman failed to install gcc"
+            fi
         else
             echo "Please install these as root"
         fi
